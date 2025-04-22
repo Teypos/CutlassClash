@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmfuvvdw4klng"]
+[gd_scene load_steps=5 format=3 uid="uid://dmfuvvdw4klng"]
 
 [ext_resource type="Script" uid="uid://bq47lai5gluo2" path="res://char.gd" id="1_njpxk"]
+[ext_resource type="Script" uid="uid://0ggmutxolkv6" path="res://camera_3d.gd" id="2_hs5vj"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hs5vj"]
 
@@ -17,10 +18,13 @@ shape = SubResource("CapsuleShape3D_njpxk")
 
 [node name="cam_controller" type="Node3D" parent="."]
 top_level = true
+script = ExtResource("2_hs5vj")
 
 [node name="cam_target" type="Node3D" parent="cam_controller"]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 5)
 
-[node name="Camera3D" type="Camera3D" parent="cam_controller/cam_target"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Pitch" type="Node3D" parent="cam_controller/cam_target"]
+
+[node name="Camera3D" type="Camera3D" parent="cam_controller/cam_target/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, 0, 0)
 fov = 100.0
