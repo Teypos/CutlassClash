@@ -24,7 +24,6 @@ top_level = true
 script = ExtResource("2_hs5vj")
 
 [node name="cam_target" type="Node3D" parent="cam_controller"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Pitch" type="Node3D" parent="cam_controller/cam_target"]
 

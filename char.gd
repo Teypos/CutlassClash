@@ -7,6 +7,7 @@ const JUMP_VELOCITY = 6.6
 @onready var pitch = $cam_controller/cam_target/Pitch
 @onready var camera3D = $cam_controller/cam_target/Pitch/Camera3D
 
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -28,6 +29,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+	$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, $cam_controller/cam_target.rotation.y, 0.06)
 
 	#cam handle
 	var camera_position = $cam_controller.position
@@ -36,4 +38,4 @@ func _physics_process(delta: float) -> void:
 	camera_position.y = lerp(camera_position.y, position.y, 0.05)
 	$cam_controller.position = camera_position
 	
-	$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, input_dir.angle(), 0.1)  
+	#$MeshInstance3D.rotation.y = lerp_angle( $MeshInstance3D.rotation.y, input_dir.angle(), 0.1)  

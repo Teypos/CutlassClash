@@ -58,11 +58,9 @@ shape = SubResource("WorldBoundaryShape3D_7dm0k")
 transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 0, 1.94821, -7.20001)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_ig7tw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_0xm2m")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_0xm2m")]
