@@ -3,7 +3,7 @@ extends Node3D
 signal set_cam_rotation(_cam_rotation : float)
 @onready var cam_target_camera3d = $cam_target
 @onready var pitch_camera3d = $cam_target/Pitch
-@onready var camera = $Pitch/Camera3D
+@onready var camera = $cam_target/Pitch/Camera3D
 
 var cam_target : float=0
 var pitch : float=0

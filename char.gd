@@ -1,10 +1,11 @@
 extends CharacterBody3D
 
-
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 6.6
 
-
+@onready var cam_target = $cam_controller/cam_target
+@onready var pitch = $cam_controller/cam_target/Pitch
+@onready var camera3D = $cam_controller/cam_target/Pitch/Camera3D
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -18,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (cam_target.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -34,3 +35,5 @@ func _physics_process(delta: float) -> void:
 	camera_position.z = lerp(camera_position.z, position.z, 0.1)
 	camera_position.y = lerp(camera_position.y, position.y, 0.05)
 	$cam_controller.position = camera_position
+	
+	$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, input_dir.angle(), 0.1)  
