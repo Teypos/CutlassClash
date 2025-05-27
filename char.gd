@@ -17,7 +17,10 @@ var lastmove := Vector3.BACK
 @onready var pitch = $cam_controller/cam_target/Pitch
 @onready var camera3D = $cam_controller/cam_target/Pitch/SpringArm3D/Camera3D
 @onready var skin = $charanim
-@onready var state = $charanim/AnimationTree["parameters/StateMachine 2/playback"]
+@onready var state = $charanim/AnimationTree["parameters/StateMachine/playback"]
+@onready var state2 = $charanim/AnimationTree["parameters/StateMachine 2/playback"]
+@onready var animtree = $charanim/AnimationTree
+
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -67,10 +70,14 @@ func _physics_process(delta: float) -> void:
 	#skin.global_rotation.y = target_angle
 	skin.global_rotation.y = lerp_angle(skin.rotation.y, target_angle, rotaspeed * delta)
 	
-	if velocity.length() > 0:
-		state.travel("run")
-	else:
-		state.travel("idle")
+	if velocity.length() > 0 and is_on_floor():
+		state.travel("Swordandshieldwalk")
+		
+	if Input.is_action_pressed("move_sprint") and is_on_floor():
+		animtree["parameters/eye_blend/blend_amount"] = 1.0
+	if not Input.is_action_pressed("move_sprint") and is_on_floor():
+		animtree["parameters/eye_blend/blend_amount"] = 0.0
+		
 	
 	
 	#$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, $cam_controller/cam_target.rotation.y, 0.06)
