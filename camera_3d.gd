@@ -3,7 +3,7 @@ extends Node3D
 signal set_cam_rotation(_cam_rotation : float)
 @onready var cam_target_camera3d = $cam_target
 @onready var pitch_camera3d = $cam_target/Pitch
-@onready var camera = $cam_target/Pitch/Camera3D
+@onready var camera = $cam_target/Pitch/SpringArm3D/Camera3D
 
 var cam_target : float=0
 var pitch : float=0
@@ -16,9 +16,8 @@ var pitch_accel : float=1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	#pass
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

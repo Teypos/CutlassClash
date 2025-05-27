@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhrs845pq33k0"]
+[gd_scene load_steps=11 format=3 uid="uid://bhrs845pq33k0"]
 
 [ext_resource type="PackedScene" uid="uid://dmfuvvdw4klng" path="res://char.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bo73p6uqrhhnw" path="res://Enemy.tscn" id="2_h2yge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0, 0.142816, 0.258404, 1)
@@ -27,7 +28,8 @@ size = Vector2(50, 50)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7dm0k"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig7tw"]
+points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ig7tw"]
 
@@ -47,12 +49,10 @@ shadow_enabled = true
 mesh = SubResource("PlaneMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-visible = false
+[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-visible = false
-shape = SubResource("WorldBoundaryShape3D_7dm0k")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_ig7tw")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 0, 1.94821, -7.20001)
@@ -63,5 +63,16 @@ mesh = SubResource("BoxMesh_ig7tw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_0xm2m")
 
+[node name="RigidBody3D" type="RigidBody3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 7.50289, 10.2192, 4.56528)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/RigidBody3D"]
+mesh = SubResource("BoxMesh_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0xm2m")
+
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CharacterBody3D2" parent="." instance=ExtResource("2_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -4)
