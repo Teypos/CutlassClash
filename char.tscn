@@ -40,6 +40,7 @@ script = ExtResource("2_hs5vj")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="cam_controller/cam_target/Pitch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_mask = 2
 shape = SubResource("SphereShape3D_hs5vj")
 spring_length = 5.0
 margin = 1.0

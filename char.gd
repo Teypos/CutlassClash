@@ -12,11 +12,12 @@ const JUMP_VELOCITY = 6.6
 var currmove = 0
 var lastmove := Vector3.BACK
 
+
 @onready var cam_target = $cam_controller/cam_target
 @onready var pitch = $cam_controller/cam_target/Pitch
 @onready var camera3D = $cam_controller/cam_target/Pitch/SpringArm3D/Camera3D
 @onready var skin = $charanim
-
+@onready var state = $charanim/AnimationTree["parameters/StateMachine 2/playback"]
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -66,11 +67,10 @@ func _physics_process(delta: float) -> void:
 	#skin.global_rotation.y = target_angle
 	skin.global_rotation.y = lerp_angle(skin.rotation.y, target_angle, rotaspeed * delta)
 	
-	#var ground_speed := velocity.length()
-	#if ground_speed > 0.0:
-		#skin.move()
-	#else:
-		#skin.idle()
+	if velocity.length() > 0:
+		state.travel("run")
+	else:
+		state.travel("idle")
 	
 	
 	#$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, $cam_controller/cam_target.rotation.y, 0.06)
