@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cde5c50n7b2bp"]
+
+[ext_resource type="PackedScene" uid="uid://c6rlhguw7dkt7" path="res://charstuff/enemy/knight.gltf" id="1_qi2p4"]
+
+[node name="Enemy" type="Node3D"]
+
+[node name="AuxScene" parent="." instance=ExtResource("1_qi2p4")]
