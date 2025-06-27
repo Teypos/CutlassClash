@@ -1,0 +1,42 @@
+[gd_scene load_steps=12 format=3 uid="uid://58ipj0iwj2lk"]
+
+[ext_resource type="PackedScene" uid="uid://de21mxf1der41" path="res://charstuff/sword/sabrefin.fbx" id="1_48tbd"]
+[ext_resource type="Texture2D" uid="uid://cesqxfudevquh" path="res://charstuff/sword/Material.003_baseColor.jpeg" id="2_bogml"]
+[ext_resource type="Texture2D" uid="uid://bt7qnr3b6rvcb" path="res://charstuff/sword/Material.003_metallicRoughness.png" id="3_wgltw"]
+[ext_resource type="Texture2D" uid="uid://c46gfg4mm1frq" path="res://charstuff/sword/Material.003_normal.png" id="4_7iu0n"]
+[ext_resource type="Texture2D" uid="uid://bhui8nclt8kwj" path="res://charstuff/sword/Material.002_baseColor.png" id="5_jhmc7"]
+[ext_resource type="Texture2D" uid="uid://caqxwtqoy4m6h" path="res://charstuff/sword/Material.002_metallicRoughness.png" id="6_8yfov"]
+[ext_resource type="Texture2D" uid="uid://dvv64fk72hlgk" path="res://charstuff/sword/Material_baseColor.jpeg" id="7_pt0sg"]
+[ext_resource type="Texture2D" uid="uid://cakq408b8mg7q" path="res://charstuff/sword/Material_metallicRoughness.png" id="8_pb04w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y5pb"]
+albedo_texture = ExtResource("2_bogml")
+metallic = 1.0
+metallic_texture = ExtResource("3_wgltw")
+roughness_texture = ExtResource("3_wgltw")
+normal_enabled = true
+normal_texture = ExtResource("4_7iu0n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34p10"]
+albedo_texture = ExtResource("5_jhmc7")
+metallic = 1.0
+metallic_texture = ExtResource("6_8yfov")
+roughness_texture = ExtResource("6_8yfov")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lyx1"]
+albedo_texture = ExtResource("7_pt0sg")
+metallic = 1.0
+metallic_texture = ExtResource("8_pb04w")
+roughness_texture = ExtResource("8_pb04w")
+
+[node name="sabre" instance=ExtResource("1_48tbd")]
+transform = Transform3D(-5.24537e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.24537e-08, 0, 0, 0)
+
+[node name="Sword_Material_003_0" parent="Sketchfab_model/9e40fc006b814d47bfb43e2ea93c4e21_fbx/RootNode2/Sword" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2y5pb")
+
+[node name="Sword_Material_002_0" parent="Sketchfab_model/9e40fc006b814d47bfb43e2ea93c4e21_fbx/RootNode2/Sword" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_34p10")
+
+[node name="Sword_Material_0" parent="Sketchfab_model/9e40fc006b814d47bfb43e2ea93c4e21_fbx/RootNode2/Sword" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7lyx1")

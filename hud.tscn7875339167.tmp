@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://du4x0j1w3foj8"]
+
+[ext_resource type="Texture2D" uid="uid://npmkfjxnqj6n" path="res://Barbossa 50x50.png" id="1_37p78"]
+[ext_resource type="Script" uid="uid://cic60cvy1ijhs" path="res://panel.gd" id="1_64ctp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2snw"]
+bg_color = Color(0.239216, 0.454902, 0.996078, 0)
+corner_radius_top_left = 15
+corner_radius_top_right = 7
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 7
+
+[node name="hud" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 665.0
+offset_bottom = 137.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n2snw")
+script = ExtResource("1_64ctp")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 102.0
+texture = ExtResource("1_37p78")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 102.0
+offset_right = 204.0
+offset_bottom = 102.0
+texture = ExtResource("1_37p78")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 204.0
+offset_right = 306.0
+offset_bottom = 102.0
+texture = ExtResource("1_37p78")
+
+[node name="TextureRect4" type="TextureRect" parent="Panel"]
+visible = false
+layout_mode = 0
+offset_left = 306.0
+offset_right = 408.0
+offset_bottom = 102.0
+texture = ExtResource("1_37p78")

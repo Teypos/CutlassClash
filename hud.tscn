@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://du4x0j1w3foj8"]
+
+[ext_resource type="Script" uid="uid://c2fyuamvhovf8" path="res://hud.gd" id="1_64ctp"]
+[ext_resource type="FontFile" uid="uid://dv4ies8lijbvf" path="res://tarrget.ttf" id="3_640wx"]
+[ext_resource type="SpriteFrames" uid="uid://ng2kam11jwv1" path="res://hudstuff/10stud.tres" id="4_a2258"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2snw"]
+bg_color = Color(0.239216, 0.454902, 0.996078, 0.219608)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_640wx"]
+font = ExtResource("3_640wx")
+font_size = 50
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="hud" type="CanvasLayer"]
+script = ExtResource("1_64ctp")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 16.0
+offset_top = 18.0
+offset_right = 416.0
+offset_bottom = 218.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n2snw")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TextureRect2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
+
+[node name="TextureRect3" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 300.0
+offset_bottom = 100.0
+
+[node name="TextureRect4" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 300.0
+offset_right = 400.0
+offset_bottom = 100.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 400.0
+offset_bottom = 200.0
+label_settings = SubResource("LabelSettings_640wx")
+vertical_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel"]
+position = Vector2(50, 150)
+scale = Vector2(1.5, 1.5)
+sprite_frames = ExtResource("4_a2258")
+animation = &"10stud"
+autoplay = "10stud"
+frame_progress = 0.91479

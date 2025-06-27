@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhrs845pq33k0"]
+[gd_scene load_steps=14 format=3 uid="uid://bhrs845pq33k0"]
 
 [ext_resource type="PackedScene" uid="uid://dmfuvvdw4klng" path="res://char.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bo73p6uqrhhnw" path="res://Enemy.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dye65yxyj4ghi" path="res://enemyres.tscn" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://du4x0j1w3foj8" path="res://hud.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://w1ma7kkqvup2" path="res://spawn.gd" id="4_lquwl"]
+[ext_resource type="Texture2D" uid="uid://npmkfjxnqj6n" path="res://hudstuff/Barbossa 50x50.png" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0, 0.142816, 0.258404, 1)
@@ -50,29 +53,49 @@ mesh = SubResource("PlaneMesh_ig7tw")
 surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 4278190081
+collision_mask = 4278190081
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
 shape = SubResource("ConvexPolygonShape3D_ig7tw")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="block" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 0, 1.94821, -7.20001)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="block"]
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="block"]
 shape = SubResource("ConvexPolygonShape3D_0xm2m")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 7.50289, 10.2192, 4.56528)
+[node name="block2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.514768, 0.857328, 0, -0.857328, 0.514768, 7.50289, 13.0904, -8.26052)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="block2"]
 mesh = SubResource("BoxMesh_ig7tw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="block2"]
 shape = SubResource("ConvexPolygonShape3D_0xm2m")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_0xm2m")]
+[node name="player" parent="." instance=ExtResource("2_0xm2m")]
 
-[node name="CharacterBody3D2" parent="." instance=ExtResource("2_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -4)
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="AuxScene" parent="CharacterBody3D" instance=ExtResource("2_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.89019, 0, -4.96609)
+
+[node name="hud" parent="." instance=ExtResource("3_h2yge")]
+
+[node name="spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38927, 3.33508, -11.677)
+script = ExtResource("4_lquwl")
+
+[node name="Sprite3D" type="Sprite3D" parent="spawner"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 2
+texture = ExtResource("5_lquwl")
+
+[node name="Timer" type="Timer" parent="spawner"]
+autostart = true
+
+[connection signal="timeout" from="spawner/Timer" to="spawner" method="_on_timer_timeout"]

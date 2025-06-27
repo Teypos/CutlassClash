@@ -1,24 +1,30 @@
 extends CharacterBody3D
 
-@export var health = 8
-const JUMP_VELOCITY = 6.6
+signal health_change(health)
+
+
+const JUMP_VELOCITY = 5 #6.6 floaty
 @export var movespeed = 5.0
 @export var runmult = 2
 @export var walkmult = 0.7
 @export var crouchmult = 0.5
 @export var deceleration = 0.5
 @export var acceleration = 20
-@export var rotaspeed = 10
+@export var rotaspeed = 15
+@export var cooldown_active: bool = false
+@export var cooldown_active2: bool = false
+@export var can_jump: bool = true
 var currmove = 0
 var lastmove := Vector3.BACK
 
+@export var maxhealth = 8
+@onready var health = maxhealth
+@onready var invulntimer = $Timer
 
 @onready var cam_target = $cam_controller/cam_target
 @onready var pitch = $cam_controller/cam_target/Pitch
 @onready var camera3D = $cam_controller/cam_target/Pitch/SpringArm3D/Camera3D
 @onready var skin = $charanim
-@onready var state = $charanim/AnimationTree["parameters/StateMachine/playback"]
-@onready var state2 = $charanim/AnimationTree["parameters/StateMachine 2/playback"]
 @onready var animtree = $charanim/AnimationTree
 
 
@@ -70,13 +76,28 @@ func _physics_process(delta: float) -> void:
 	#skin.global_rotation.y = target_angle
 	skin.global_rotation.y = lerp_angle(skin.rotation.y, target_angle, rotaspeed * delta)
 	
+	var changer = velocity.x 
+	
 	if velocity.length() > 0 and is_on_floor():
-		state.travel("Swordandshieldwalk")
-		
+		animtree.set("parameters/state/transition_request", "walk")
 	if Input.is_action_pressed("move_sprint") and is_on_floor():
-		animtree["parameters/eye_blend/blend_amount"] = 1.0
-	if not Input.is_action_pressed("move_sprint") and is_on_floor():
-		animtree["parameters/eye_blend/blend_amount"] = 0.0
+		animtree.set("parameters/state/transition_request", "run")
+	if velocity.length() == 0 and is_on_floor():
+		animtree.set("parameters/state/transition_request", "idle")
+	if Input.is_action_just_pressed("move_jump") and can_jump == true:
+		animtree.set("parameters/jumper/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		if not is_on_floor():
+			can_jump == false
+			$CDTimer2.start()
+	if Input.is_action_just_pressed("mb0") and cooldown_active == false:
+		animtree.set("parameters/shotattack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		cooldown_active = true
+		$CDTimer.start()
+	if Input.is_action_just_pressed("mb0") and Input.is_action_pressed("move_crouch"):
+		animtree.set("parameters/attackheavy/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		#$Node/Skeleton3D/BoneAttachment3D/sabre/Area3D
+		
+		
 		
 	
 	
@@ -98,3 +119,21 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("ui_text_backspace"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+	if event.is_action_pressed("key_j") and PlayerVar.health <=8:
+		PlayerVar.health += 1
+		
+	if event.is_action_pressed("key_k") and PlayerVar.health >=1:
+		PlayerVar.health -= 1
+		
+		
+
+
+func _on_cd_timer_timeout() -> void:
+	cooldown_active = false
+	pass # Replace with function body.
+
+
+func _on_cd_timer_2_timeout() -> void:
+	can_jump = true
+	pass # Replace with function body.

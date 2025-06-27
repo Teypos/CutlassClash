@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0od74ak13gv3"]
+
+[ext_resource type="Script" uid="uid://dil80ktc2btu7" path="res://coin_1000.gd" id="1_1t332"]
+[ext_resource type="SpriteFrames" uid="uid://n7h5fmc8hb8v" path="res://hudstuff/1000stud.tres" id="2_1t332"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6qpsl"]
+margin = 0.4
+radius = 0.75
+
+[node name="RigidBody3D" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 1073741824
+script = ExtResource("1_1t332")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_6qpsl")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_6qpsl")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Area3D"]
+pixel_size = 0.0075
+billboard = 1
+sprite_frames = ExtResource("2_1t332")
+animation = &"1000stud"
+autoplay = "1000stud"
+frame_progress = 0.991887
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
