@@ -1,8 +1,5 @@
 extends CharacterBody3D
 
-signal health_change(health)
-
-
 const JUMP_VELOCITY = 5 #6.6 floaty
 @export var movespeed = 5.0
 @export var runmult = 2
@@ -19,7 +16,7 @@ var lastmove := Vector3.BACK
 
 @export var maxhealth = 8
 @onready var health = maxhealth
-@onready var invulntimer = $Timer
+@onready var invulntimer = $CDTimer4
 
 @onready var cam_target = $cam_controller/cam_target
 @onready var pitch = $cam_controller/cam_target/Pitch
@@ -86,15 +83,17 @@ func _physics_process(delta: float) -> void:
 		animtree.set("parameters/state/transition_request", "idle")
 	if Input.is_action_just_pressed("move_jump") and can_jump == true:
 		animtree.set("parameters/jumper/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		can_jump = false
 		if not is_on_floor():
-			can_jump == false
-			$CDTimer2.start()
-	if Input.is_action_just_pressed("mb0") and cooldown_active == false:
+			$CDTimer3.start()
+	if Input.is_action_just_pressed("mb0") and cooldown_active == false and cooldown_active2 == false:
 		animtree.set("parameters/shotattack/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		cooldown_active = true
 		$CDTimer.start()
-	if Input.is_action_just_pressed("mb0") and Input.is_action_pressed("move_crouch"):
+	if Input.is_action_just_pressed("mb0") and Input.is_action_pressed("move_crouch") and cooldown_active2 == false:
 		animtree.set("parameters/attackheavy/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		cooldown_active2 = true
+		$CDTimer2.start()
 		#$Node/Skeleton3D/BoneAttachment3D/sabre/Area3D
 		
 		
@@ -135,5 +134,10 @@ func _on_cd_timer_timeout() -> void:
 
 
 func _on_cd_timer_2_timeout() -> void:
+	cooldown_active2 = false
+	pass # Replace with function body.
+
+
+func _on_cd_timer_3_timeout() -> void:
 	can_jump = true
 	pass # Replace with function body.

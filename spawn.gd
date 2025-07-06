@@ -24,9 +24,7 @@ func spawn_coin1000():
 	var coincopy1000 = coinsp1000.instantiate()
 	add_child(coincopy1000)
 	
-
 func _on_timer_timeout() -> void:
-	
 	var choice = randi() % 3 + 1
 	
 	match choice:

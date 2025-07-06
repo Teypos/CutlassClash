@@ -1,11 +1,8 @@
 class_name charanim extends Node3D
 
 func _process(delta: float) -> void:
-	#$AnimationTree.advance(delta * 1000)
 	pass
-#func idle():
-	#state_machine.travel("Idle")
 
 
-func _on_cooldown_timer_timeout() -> void:
-	pass # Replace with function body.
+func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	PlayerVar.enemyhp -= 1

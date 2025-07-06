@@ -25,6 +25,14 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/unidot_importer/plugin.cfg")
+
+[global_group]
+
+collect="for collecting coin"
+
 [importer_defaults]
 
 animation_library={

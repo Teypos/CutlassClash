@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var health = 10
-
+@export var hit_cooldown_active: bool = false
+@export var killtimer: bool = true
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -10,17 +10,17 @@ func _physics_process(delta: float) -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if health <=0:
-		queue_free()
-		
-
-
-#func _on_area_3d_area_entered(area: Area3D) -> void:
-	#health-=1
-	#$AnimationTree.set("parameters/gethit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	#$Timer.start()
-	#health = clamp(health, health, health)
+	if PlayerVar.enemyhp == 0:
+		$spawner.spawn_on_death()
 
 func _on_timer_timeout() -> void:
-	
-	pass # Replace with function body.
+	hit_cooldown_active = false
+
+
+func _on_area_3d_area_shape_entered(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
+	if hit_cooldown_active == false:
+		PlayerVar.enemyhp = PlayerVar.enemyhp - 1
+		$AnimationTree.set("parameters/gethit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		hit_cooldown_active = true
+		$Timer.start()
+		
