@@ -25,9 +25,6 @@ func _on_area_3d_area_shape_entered(area_rid: RID, area: Area3D, area_shape_inde
 	var other_shape_owner = area.shape_find_owner(area_shape_index)
 	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
 	if other_shape_node.is_in_group("hitbox"):
-		$Timer.start(120)
+		$ESTimer.start(120)
 	if other_shape_node.is_in_group("collect"):
-		$Timer.start(5)
-		
-func _on_area_3d_area_shape_exited(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
-		$Timer.start(5)
+		$ESTimer.start(10)

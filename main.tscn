@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://bhrs845pq33k0"]
+[gd_scene load_steps=18 format=3 uid="uid://bhrs845pq33k0"]
 
+[ext_resource type="Texture2D" uid="uid://b2q38dmibmkkr" path="res://map/textures/69777695cf0d4f5c010beee49ad17c85.jpg" id="1_5vw27"]
 [ext_resource type="PackedScene" uid="uid://dmfuvvdw4klng" path="res://char.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://du4x0j1w3foj8" path="res://hud.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://w1ma7kkqvup2" path="res://spawn.gd" id="4_lquwl"]
@@ -31,7 +32,8 @@ glow_enabled = true
 size = Vector2(50, 50)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
+albedo_texture = ExtResource("1_5vw27")
+uv1_scale = Vector3(15, 15, 15)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig7tw"]
 points = PackedVector3Array(-25, 0, -25, -25, 0, 25, 25, 0, -25, 25, 0, 25)
@@ -105,7 +107,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 billboard = 2
 texture = ExtResource("5_lquwl")
 
-[node name="Timer" type="Timer" parent="Arena2/spawner"]
+[node name="ESTimer" type="Timer" parent="Arena2/spawner"]
 wait_time = 15.0
 autostart = true
 
@@ -139,6 +141,5 @@ omni_range = 702.303
 omni_attenuation = 0.381
 
 [connection signal="timeout" from="spawner/Timer" to="spawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="Arena2/spawner/Timer" to="Arena2/spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Arena2/spawner/ESTimer" to="Arena2/spawner" method="_on_timer_timeout"]
 [connection signal="area_shape_entered" from="Arena2/spawner/Area3D" to="Arena2/spawner" method="_on_area_3d_area_shape_entered"]
-[connection signal="area_shape_exited" from="Arena2/spawner/Area3D" to="Arena2/spawner" method="_on_area_3d_area_shape_exited"]

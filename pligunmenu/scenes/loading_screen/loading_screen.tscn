@@ -7,9 +7,37 @@
 [node name="LoadingScreen" instance=ExtResource("1_m3j4y")]
 script = ExtResource("2_cchb1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/BackPanel" index="0"]
-position = Vector2(960, 382.5)
-scale = Vector2(2.73438, 2.73438)
+[node name="BackgroundTextureRect" parent="Control" index="2"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+
+[node name="VBoxContainer" parent="Control" index="3"]
+layout_mode = 1
+anchors_preset = 14
+offset_top = -51.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control" index="4"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 50
+alignment = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/VBoxContainer2" index="0"]
+scale = Vector2(3, 3)
 sprite_frames = ExtResource("3_cchb1")
 animation = &"1000stud"
 autoplay = "1000stud"
