@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://8ngdcr5licxo"]
+
+[ext_resource type="PackedScene" uid="uid://sikc02ddepyt" path="res://addons/maaacks_menus_template/base/scenes/opening/opening.tscn" id="1_q82yj"]
+[ext_resource type="Script" uid="uid://pl5lda02upy3" path="res://pligunmenu/scenes/opening/opening.gd" id="2_tptko"]
+[ext_resource type="Texture2D" uid="uid://bonytq8swrhde" path="res://pligunmenu/assets/godot_engine_logo/logo_vertical_color_dark.png" id="3_02jyj"]
+
+[node name="Opening" instance=ExtResource("1_q82yj")]
+script = ExtResource("2_tptko")
+next_scene = "res://pligunmenu/scenes/menus/main_menu/main_menu_with_animations.tscn"
+images = Array[Texture2D]([ExtResource("3_02jyj")])

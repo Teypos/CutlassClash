@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhrs845pq33k0"]
+[gd_scene load_steps=16 format=3 uid="uid://bhrs845pq33k0"]
 
 [ext_resource type="PackedScene" uid="uid://dmfuvvdw4klng" path="res://char.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://dye65yxyj4ghi" path="res://enemyres.tscn" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://du4x0j1w3foj8" path="res://hud.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://w1ma7kkqvup2" path="res://spawn.gd" id="4_lquwl"]
 [ext_resource type="Texture2D" uid="uid://npmkfjxnqj6n" path="res://hudstuff/Barbossa 50x50.png" id="5_lquwl"]
-[ext_resource type="PackedScene" uid="uid://c8ngcp2yfrcdl" path="res://map/Arena.blend" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://ci4jpdky70ggo" path="res://enemyspawner.gd" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://sf6kf3nrh3pm" path="res://map/map.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cboru10whnjqe" path="res://enemy.tscn" id="6_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
 sky_top_color = Color(0, 0.142816, 0.258404, 1)
@@ -49,16 +50,6 @@ environment = SubResource("Environment_h2yge")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="DirectionalLight3D"]
-transform = Transform3D(1, -2.98023e-08, 1.49012e-08, 0, 1, -2.98023e-08, 0, 0, 1, 2.77264e-07, 8.23164, 14.2576)
-light_color = Color(1, 0.792157, 0.356863, 1)
-light_energy = 1.33
-light_indirect_energy = 7.048
-light_volumetric_fog_energy = 0.0
-light_specular = 1.05
-omni_range = 702.303
-omni_attenuation = 0.381
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.7754, 0)
 mesh = SubResource("PlaneMesh_ig7tw")
@@ -71,15 +62,6 @@ collision_mask = 4278190081
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
 shape = SubResource("ConvexPolygonShape3D_ig7tw")
 
-[node name="block" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.870278, 0.49256, 0, -0.49256, 0.870278, 0, 1.94821, -7.20001)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="block"]
-mesh = SubResource("BoxMesh_ig7tw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="block"]
-shape = SubResource("ConvexPolygonShape3D_0xm2m")
-
 [node name="block2" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.514768, 0.857328, 0, -0.857328, 0.514768, 7.50289, 13.0904, 8.10187)
 
@@ -91,13 +73,10 @@ shape = SubResource("ConvexPolygonShape3D_0xm2m")
 
 [node name="player" parent="." instance=ExtResource("2_0xm2m")]
 
-[node name="enemy" parent="." instance=ExtResource("2_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -4.3135, -2)
-
 [node name="hud" parent="." instance=ExtResource("3_h2yge")]
 
 [node name="spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.38927, 3.33508, -11.677)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -33.6506)
 script = ExtResource("4_lquwl")
 
 [node name="Sprite3D" type="Sprite3D" parent="spawner"]
@@ -108,7 +87,47 @@ texture = ExtResource("5_lquwl")
 [node name="Timer" type="Timer" parent="spawner"]
 autostart = true
 
-[node name="Arena Model" parent="." instance=ExtResource("6_7mycd")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+[node name="Arena" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="Arena2" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(-5, 0, -4.37114e-07, 0, 5, 0, 4.37114e-07, 0, -5, 0, 0, -73.5587)
+
+[node name="spawner" type="Node3D" parent="Arena2"]
+transform = Transform3D(0.2, 0, 1.42109e-15, 0, 0.2, 0, -1.42109e-15, 0, 0.2, -2.92789e-06, 2.06737, -0.15947)
+script = ExtResource("6_5vw27")
+
+[node name="Sprite3D" type="Sprite3D" parent="Arena2/spawner"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 2
+texture = ExtResource("5_lquwl")
+
+[node name="Timer" type="Timer" parent="Arena2/spawner"]
+wait_time = 15.0
+autostart = true
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81547, 0.338708, -3.0064)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -5.24521e-06, 16.4633, 9.53674e-06)
+light_color = Color(1, 0.792157, 0.356863, 1)
+light_energy = 1.33
+light_indirect_energy = 7.048
+light_volumetric_fog_energy = 0.0
+light_specular = 1.05
+omni_range = 702.303
+omni_attenuation = 0.381
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.625, 0.345994, -0.69976, -0.433013, 0.899519, 0.0580127, 0.649519, 0.266747, 0.712019, 0, 14.9679, -74.0553)
+light_color = Color(1, 0.792157, 0.356863, 1)
+light_energy = 1.33
+light_indirect_energy = 7.048
+light_volumetric_fog_energy = 0.0
+light_specular = 1.05
+omni_range = 702.303
+omni_attenuation = 0.381
 
 [connection signal="timeout" from="spawner/Timer" to="spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Arena2/spawner/Timer" to="Arena2/spawner" method="_on_timer_timeout"]

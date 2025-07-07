@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5x0t6vllkmfa"]
+
+[ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_menus_template/base/scenes/menus/main_menu/main_menu.tscn" id="1_im6yo"]
+[ext_resource type="Script" uid="uid://bf5pxtrtdn58h" path="res://pligunmenu/scenes/menus/main_menu/main_menu.gd" id="2_noxml"]
+[ext_resource type="PackedScene" uid="uid://0cdmp7spsgqj" path="res://pligunmenu/scenes/menus/options_menu/master_options_menu_with_tabs.tscn" id="3_c0x2i"]
+[ext_resource type="PackedScene" uid="uid://2a6eluaoia58" path="res://pligunmenu/scenes/credits/scrollable_credits.tscn" id="4_gafsr"]
+
+[node name="MainMenu" instance=ExtResource("1_im6yo")]
+script = ExtResource("2_noxml")
+options_packed_scene = ExtResource("3_c0x2i")
+credits_packed_scene = ExtResource("4_gafsr")
+
+[node name="BackgroundMusicPlayer" parent="." index="1"]
+bus = &"Master"
+
+[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" index="0"]
+text = "Cutlass Clash"
+
+[node name="SubTitleLabel" parent="MenuContainer/SubTitleMargin/SubTitleContainer" index="0"]
+text = "Jogo Hack 'n Slash em Terceira Pessoa"

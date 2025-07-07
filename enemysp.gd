@@ -3,7 +3,7 @@ extends Node3D
 func spawn_on_death():
 	var choice = randi() % 2 + 1 
 	var i = 0
-	while i <= 1000:
+	if i < 1000:
 		match choice:
 			1:
 				if i < 1000:
@@ -13,6 +13,8 @@ func spawn_on_death():
 				if i < 1000:
 					spawn_coin100()
 					i = i + 100
+	else: 
+		queue_free()
 	
 func spawn_coin10():
 	var coinsp10 = load("res://coin10.tscn")

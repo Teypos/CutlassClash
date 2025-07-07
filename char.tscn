@@ -64,14 +64,10 @@ wait_time = 0.9
 wait_time = 1.2
 
 [node name="CDTimer4" type="Timer" parent="."]
-wait_time = 1.2
+wait_time = 2.0
 
+[connection signal="body_shape_entered" from="collect" to="." method="_on_collect_body_shape_entered"]
 [connection signal="timeout" from="CDTimer" to="." method="_on_cd_timer_timeout"]
-[connection signal="timeout" from="CDTimer2" to="." method="_on_cd_timer_timeout"]
 [connection signal="timeout" from="CDTimer2" to="." method="_on_cd_timer_2_timeout"]
 [connection signal="timeout" from="CDTimer3" to="." method="_on_cd_timer_3_timeout"]
-[connection signal="timeout" from="CDTimer3" to="." method="_on_cd_timer_timeout"]
-[connection signal="timeout" from="CDTimer3" to="." method="_on_cd_timer_2_timeout"]
-[connection signal="timeout" from="CDTimer4" to="." method="_on_cd_timer_3_timeout"]
-[connection signal="timeout" from="CDTimer4" to="." method="_on_cd_timer_timeout"]
-[connection signal="timeout" from="CDTimer4" to="." method="_on_cd_timer_2_timeout"]
+[connection signal="timeout" from="CDTimer4" to="." method="_on_cd_timer_4_timeout"]

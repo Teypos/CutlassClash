@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cboru10whnjqe"]
+[gd_scene load_steps=6 format=3 uid="uid://cboru10whnjqe"]
 
 [ext_resource type="Script" uid="uid://c0xgkjhsybhe7" path="res://enemygrav.gd" id="1_qi2p4"]
 [ext_resource type="PackedScene" uid="uid://dye65yxyj4ghi" path="res://enemyres.tscn" id="2_qi2p4"]
+[ext_resource type="Script" uid="uid://c2qplik3fyqq8" path="res://enemysp.gd" id="3_qi2p4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qi2p4"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iifgy"]
+
 [node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 257
+collision_mask = 257
 script = ExtResource("1_qi2p4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -13,3 +18,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_qi2p4")
 
 [node name="AuxScene" parent="." instance=ExtResource("2_qi2p4")]
+
+[node name="spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_qi2p4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_iifgy")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]

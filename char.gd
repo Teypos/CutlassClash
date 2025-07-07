@@ -11,6 +11,7 @@ const JUMP_VELOCITY = 5 #6.6 floaty
 @export var cooldown_active: bool = false
 @export var cooldown_active2: bool = false
 @export var can_jump: bool = true
+@export var hurtable: bool = true
 var currmove = 0
 var lastmove := Vector3.BACK
 
@@ -95,10 +96,6 @@ func _physics_process(delta: float) -> void:
 		cooldown_active2 = true
 		$CDTimer2.start()
 		#$Node/Skeleton3D/BoneAttachment3D/sabre/Area3D
-		
-		
-		
-	
 	
 	#$MeshInstance3D.rotation.y = lerp($MeshInstance3D.rotation.y, $cam_controller/cam_target.rotation.y, 0.06)
 
@@ -127,6 +124,12 @@ func _input(event: InputEvent) -> void:
 		
 		
 
+func _on_collect_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+	if hurtable == true:
+		PlayerVar.health -= 1
+		hurtable = false
+		$CDTimer4.start()
+
 
 func _on_cd_timer_timeout() -> void:
 	cooldown_active = false
@@ -141,3 +144,8 @@ func _on_cd_timer_2_timeout() -> void:
 func _on_cd_timer_3_timeout() -> void:
 	can_jump = true
 	pass # Replace with function body.
+
+
+func _on_cd_timer_4_timeout() -> void:
+	pass # Replace with function body.
+	hurtable = true

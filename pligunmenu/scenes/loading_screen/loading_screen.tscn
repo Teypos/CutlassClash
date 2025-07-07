@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq8anlq6t2lao"]
+
+[ext_resource type="PackedScene" uid="uid://cd0jbh4metflb" path="res://addons/maaacks_menus_template/base/scenes/loading_screen/loading_screen.tscn" id="1_m3j4y"]
+[ext_resource type="Script" uid="uid://kf333umca48u" path="res://pligunmenu/scenes/loading_screen/loading_screen.gd" id="2_cchb1"]
+[ext_resource type="SpriteFrames" uid="uid://n7h5fmc8hb8v" path="res://hudstuff/1000stud.tres" id="3_cchb1"]
+
+[node name="LoadingScreen" instance=ExtResource("1_m3j4y")]
+script = ExtResource("2_cchb1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/BackPanel" index="0"]
+position = Vector2(960, 382.5)
+scale = Vector2(2.73438, 2.73438)
+sprite_frames = ExtResource("3_cchb1")
+animation = &"1000stud"
