@@ -12,3 +12,5 @@ position = Vector2(960, 382.5)
 scale = Vector2(2.73438, 2.73438)
 sprite_frames = ExtResource("3_cchb1")
 animation = &"1000stud"
+autoplay = "1000stud"
+frame_progress = 0.461352

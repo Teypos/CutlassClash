@@ -1,16 +1,8 @@
-# Attribution
-## Collaborators
+# Créditos
 
-### Role
-Gustavo Carreira - Desenvolvedor
-[Person w/ Link]()  
+### Desenvolvimento do Jogo
+Gustavo Carreira 
 
-## Sourced
-### Asset Type
-#### Use Case
-### Author: [Name]()  
-### Source: [Domain : webpage.html]()  
-### License: [License]()
 
 #### Godot Engine Logo
 Author: Andrea Calabró  

@@ -1,19 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://dverd4o2gbfd7"]
+[gd_scene load_steps=5 format=3 uid="uid://dverd4o2gbfd7"]
 
 [ext_resource type="Script" uid="uid://7mm03k3v02ag" path="res://coin_100.gd" id="1_bv26c"]
 [ext_resource type="SpriteFrames" uid="uid://bai0m5udhey8b" path="res://hudstuff/100stud.tres" id="2_bv26c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bv26c"]
+radius = 0.22
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_6qpsl"]
 margin = 0.4
 radius = 0.75
 
 [node name="RigidBody3D" type="RigidBody3D"]
-collision_layer = 2
-collision_mask = 1073741824
+collision_layer = 65538
+collision_mask = 1073807360
+angular_damp = 0.5
 script = ExtResource("1_bv26c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_6qpsl")
+shape = SubResource("SphereShape3D_bv26c")
 
 [node name="Area3D" type="Area3D" parent="."]
 collision_layer = 2

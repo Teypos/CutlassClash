@@ -9,8 +9,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iifgy"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-collision_layer = 257
-collision_mask = 257
+collision_layer = 769
+collision_mask = 769
 script = ExtResource("1_qi2p4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -35,7 +35,7 @@ one_shot = true
 collision_layer = 257
 collision_mask = 257
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" groups=["hitbox"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_iifgy")
 

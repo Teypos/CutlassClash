@@ -36,7 +36,9 @@ func _on_timer_timeout() -> void:
 
 
 func _on_area_3d_area_shape_entered(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
-	if hit_cooldown_active == false:
+	var other_shape_owner = area.shape_find_owner(area_shape_index)
+	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
+	if other_shape_node.is_in_group("swordhitbox") and hit_cooldown_active == false:
 		health -= 1
 		$AuxScene/AnimationTree.set("parameters/gethit/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		hit_cooldown_active = true

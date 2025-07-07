@@ -122,13 +122,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("key_k") and PlayerVar.health >=1:
 		PlayerVar.health -= 1
 		
-		
-
-func _on_collect_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
-	if hurtable == true:
+func _on_collect_area_shape_entered(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int) -> void:
+	var other_shape_owner = area.shape_find_owner(area_shape_index)
+	var other_shape_node = area.shape_owner_get_owner(other_shape_owner)
+	if other_shape_node.is_in_group("hitbox") and hurtable == true:
 		PlayerVar.health -= 1
+		print("owie")
 		hurtable = false
 		$CDTimer4.start()
+		
 
 
 func _on_cd_timer_timeout() -> void:
